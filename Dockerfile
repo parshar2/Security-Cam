@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
 	python-pip \
 	python-dev \
 	build-essential \ 
+	python-opencv \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
