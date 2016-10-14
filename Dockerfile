@@ -11,13 +11,12 @@ RUN apt-get update && apt-get install -y \
 	iptables \
 	nodejs \
 	python-imaging \
+	wget curl\
+	build-essential\
+	cmake\
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
-run apt-get update && apt-get install -y -q wget curl
-run apt-get update && apt-get install -y -q build-essential
-run apt-get update && apt-get install -y -q cmake
-run apt-get update && apt-get install -y -q python2.7 python2.7-dev
 run wget 'https://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg' && /bin/sh setuptools-0.6c11-py2.7.egg && rm -f setuptools-0.6c11-py2.7.egg
 run curl 'https://raw.github.com/pypa/pip/master/contrib/get-pip.py' | python2.7
 run pip install numpy
@@ -38,6 +37,7 @@ ADD chute/web /var/www/html
 # ADD <path_inside_repository> <path_inside_container>
 #
 ADD chute/seccam.py /usr/local/bin/seccam.py
+ADD chute/haarcascade_frontalface_alt.xml /usr/local/haarcascade_frontalface_alt.xml
 ADD chute/run.sh /usr/local/bin/run.sh
 
 # Set the work dir for nodejs photo server

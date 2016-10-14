@@ -6,6 +6,8 @@ import base64
 import StringIO
 import cv2
 
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
 try:
     import PIL
     from PIL import Image, ImageChops
@@ -183,6 +185,16 @@ if(__name__ == "__main__"):
                 time.sleep(m_sec)
                 continue
             else:
+		 img_cv = cv2.imread(img)
+		 gray = cv2.cvtColor(img_cv, cv2.COLOR_BGR2GRAY)
+		 faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+		 for (x,y,w,h) in faces:
+		     cv2.rectangle(img_cv,(x,y),(x+w,y+h),(255,0,0),2)
+		 fileName = "%s%d.jpg" % (m_save, time.time())
+                 img_cv.save(fileName)
+		 '''cv2.imshow('img',img)
+		 cv2.waitKey(0)
+		 cv2.destroyAllWindows()
                 tup = detectMotion(img, oldjpg)
                 if(tup):
                     # Explode the result
@@ -201,7 +213,7 @@ if(__name__ == "__main__"):
                             jpg.save(fileName)
                     else:
                         print('-- No diff yet')
-                    oldjpg = jpg
+                    oldjpg = jpg'''
             time.sleep(m_sec)
         except KeyboardInterrupt:
             break
