@@ -11,12 +11,18 @@ RUN apt-get update && apt-get install -y \
 	iptables \
 	nodejs \
 	python-imaging \
-	wget curl\
-	build-essential\
-	cmake\
+	pip \
+	wget \
+	curl \
+	build-essential \
+	cmake \
+	python-pip \
+	python-dev \
+	build-essential \ 
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
+RUN easy_install pip
 run wget 'https://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg' && /bin/sh setuptools-0.6c11-py2.7.egg && rm -f setuptools-0.6c11-py2.7.egg
 run curl 'https://raw.github.com/pypa/pip/master/contrib/get-pip.py' | python2.7
 run pip install numpy
